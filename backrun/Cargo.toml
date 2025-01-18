@@ -1,0 +1,25 @@
+[package]
+name = "jito-backrun-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+jito-searcher-client = { workspace = true }
+jito-protos = { workspace = true }
+
+solana-client = { workspace = true }
+solana-metrics = { workspace = true }
+solana-sdk = { workspace = true }
+solana-transaction-status = { workspace = true }
+
+clap = { workspace = true, features = ["derive", "env"] }
+env_logger = { workspace = true }
+futures-util = { workspace = true }
+histogram = { workspace = true }
+log = { workspace = true }
+rand = { workspace = true }
+spl-memo = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true, features = ["tls", "tls-roots", "tls-webpki-roots"] }
+uuid = { workspace = true, features = ["v4"] }
