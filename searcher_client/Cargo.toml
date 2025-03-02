@@ -1,11 +1,11 @@
 [package]
-name = "jito-searcher-client"
+name = "shiroi-searcher-client"
 version = "0.1.0"
 edition = "2021"
 description = "Wrapper around the generated gRPC. Adds auth and retry semantics."
 
 [dependencies]
-jito-protos = { workspace = true }
+shiroi-protos = { workspace = true }
 
 solana-sdk = { workspace = true }
 solana-client = { workspace = true }
