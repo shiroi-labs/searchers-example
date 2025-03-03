@@ -4,14 +4,13 @@ use std::{
 };
 
 use futures_util::StreamExt;
-use jito_protos::{
+use shiroi_protos::{
     auth::{auth_service_client::AuthServiceClient, Role},
     bundle::{
         bundle_result::Result as BundleResultType, rejected::Reason, Accepted, Bundle,
         BundleResult, InternalError, SimulationFailure, StateAuctionBidRejected,
         WinningBatchBidRejected,
     },
-    convert::proto_packet_from_versioned_tx,
     searcher::{
         searcher_service_client::SearcherServiceClient, SendBundleRequest, SendBundleResponse,
     },
@@ -212,7 +211,7 @@ where
     // convert them to packets + send over
     let packets: Vec<_> = transactions
         .iter()
-        .map(proto_packet_from_versioned_tx)
+        .map(Into::into)
         .collect();
 
     searcher_client

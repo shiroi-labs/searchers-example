@@ -1,17 +1,14 @@
-use std::{env, path::PathBuf, sync::Arc, time::Duration};
+use std::{env, path::PathBuf, sync::Arc};
 
 use clap::{Parser, Subcommand};
 use env_logger::TimestampPrecision;
-use futures_util::StreamExt;
-use jito_protos::{
-    convert::versioned_tx_from_packet,
+use shiroi_protos::{
     searcher::{
         searcher_service_client::SearcherServiceClient, ConnectedLeadersRegionedRequest,
-        GetTipAccountsRequest, NextScheduledLeaderRequest, PendingTxNotification,
-        SubscribeBundleResultsRequest,
+        GetTipAccountsRequest, NextScheduledLeaderRequest, SubscribeBundleResultsRequest,
     },
 };
-use jito_searcher_client::{
+use shiroi_searcher_client::{
     get_searcher_client_auth, get_searcher_client_no_auth, send_bundle_with_confirmation,
     token_authenticator::ClientInterceptor,
 };
@@ -28,7 +25,6 @@ use spl_memo::build_memo;
 use tonic::{
     codegen::{Body, Bytes, InterceptedService, StdError},
     transport::Channel,
-    Streaming,
 };
 
 #[derive(Parser, Debug)]
@@ -96,6 +92,7 @@ enum Commands {
     },
 }
 
+#[allow(dead_code)]
 async fn print_next_leader_info(
     client: &mut SearcherServiceClient<InterceptedService<Channel, ClientInterceptor>>,
     regions: Vec<String>,
@@ -308,38 +305,6 @@ where
             )
             .await
             .expect("Sending bundle failed");
-        }
-    }
-}
-
-pub async fn print_packet_stream(
-    client: &mut SearcherServiceClient<InterceptedService<Channel, ClientInterceptor>>,
-    mut pending_transactions: Streaming<PendingTxNotification>,
-    regions: Vec<String>,
-) {
-    loop {
-        match tokio::time::timeout(Duration::from_secs(5), pending_transactions.next()).await {
-            Ok(Some(Ok(notification))) => {
-                let transactions: Vec<VersionedTransaction> = notification
-                    .transactions
-                    .iter()
-                    .filter_map(versioned_tx_from_packet)
-                    .collect();
-                for tx in transactions {
-                    info!("tx sig: {:?}", tx.signatures[0]);
-                }
-            }
-            Ok(Some(Err(e))) => {
-                info!("error from pending transaction stream: {e:?}");
-                break;
-            }
-            Ok(None) => {
-                info!("pending transaction stream closed");
-                break;
-            }
-            Err(_) => {
-                print_next_leader_info(client, regions.clone()).await;
-            }
         }
     }
 }

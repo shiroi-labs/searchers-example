@@ -3,7 +3,7 @@ use std::{
     time::{Duration, SystemTime},
 };
 
-use jito_protos::auth::{
+use shiroi_protos::auth::{
     auth_service_client::AuthServiceClient, GenerateAuthChallengeRequest,
     GenerateAuthTokensRequest, RefreshAccessTokenRequest, Role, Token,
 };
