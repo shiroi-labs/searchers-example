@@ -7,20 +7,19 @@ resolver = "2"
 
 [workspace.dependencies]
 shiroi-searcher-client = { path = "./searcher_client" }
-shiroi-protos = { git = "https://github.com/shiroi-labs/shiroi-protos.git" }
-
-solana-sdk = "=1.18.23"
-solana-client = "=1.18.23"
-solana-metrics = "=1.18.23"
+shiroi-protos = { git = "https://github.com/shiroi-labs/shiroi-protos.git", branch = "main" }
 
 clap = { version = "4" }
 dotenvy = { version = "0.15.7" }
 env_logger = "0.11.6"
 futures-util = "0.3.31"
 log = "0.4.25"
-spl-memo = "3.0.1"
-tokio = { version = "1" }
-tonic = { version = "0.10" }
-thiserror = "2.0.11"
 prost = "0.12.6"
 prost-types = "0.12.6"
+solana-sdk = "=2.1.14"
+solana-client = "=2.1.14"
+solana-metrics = "=2.1.14"
+spl-memo = "6.0.0"
+thiserror = "2.0.11"
+tokio = { version = "1" }
+tonic = { version = "0.10" }
