@@ -31,9 +31,6 @@ http://ny.shiroi.network:10001
 SEA:
 http://jp.shiroi.network:10001 
 
-### On-chain addresses
-On-chain addresses for tip programs and tip accounts can be found here: https://jito-foundation.gitbook.io/mev/mev-payment-and-distribution/on-chain-addresses
-
 ## Folders
 
 ### cli
