@@ -31,9 +31,6 @@ http://ny.shiroi.network:10001
 SEA:
 http://jp.shiroi.network:10001 
 
-### Block Engine API Key
-Please apply for block engine API keys here: https://web.miniextensions.com/WV3gZjFwqNqITsMufIEp
-
 ### On-chain addresses
 On-chain addresses for tip programs and tip accounts can be found here: https://jito-foundation.gitbook.io/mev/mev-payment-and-distribution/on-chain-addresses
 
